@@ -10,19 +10,18 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class SoonestBin {
-    static HashMap<String, String> imagePaths = new HashMap<>();
-    static LocalDate today = LocalDate.now();
+    HashMap<String, String> imagePaths = new HashMap<>();
+    String soonestBinPath;
+    LocalDate today = LocalDate.now();
 
-    static {
+    public SoonestBin() {
         imagePaths.put("GreenBin", "/images/greenbinicon.jpg");
         imagePaths.put("LargeBlueContainer", "/images/bluebinicon.jpg");
         imagePaths.put("LargeBrownContainer", "/images/brownbinicon.jpg");
         imagePaths.put("LargeDomesticWasteContainer", "/images/greybinicon.jpg");
     }
 
-    public static String selectImage(HashMap<String, String> dates) {
-
-        System.out.println("calling selectImage");
+    public String selectImage(HashMap<String, String> dates) {
 
         DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("EEEE d MMM yyyy", Locale.ENGLISH);
         TreeMap<String, Integer> orderedBins = new TreeMap<>();
@@ -33,18 +32,16 @@ public class SoonestBin {
             LocalDate parsedDate = LocalDate.parse(unparsedDate, inputFormatter);
 
             Period period = Period.between(parsedDate, today);
-            System.out.println(parsedDate);
-            System.out.println(period.getDays());
 
             orderedBins.put(date.getKey(), period.getDays());
         }
 
         // sorts the parsed date map and gets the last key which is the soonest bin
         TreeMap<String, Integer> sortedByValue = sortByValues(orderedBins);
-        System.out.println(sortedByValue);
         String lastKey = (String) sortedByValue.lastKey();
-        System.out.println(lastKey);
         String soonestBin = imagePaths.get(lastKey);
+
+        this.soonestBinPath = soonestBin;
 
         return soonestBin;
 
@@ -64,5 +61,9 @@ public class SoonestBin {
         TreeMap<K, V> sortedByValues = new TreeMap<K, V>(valueComparator);
         sortedByValues.putAll(map);
         return sortedByValues;
+    }
+
+    public String getSoonestBin() {
+        return this.soonestBinPath;
     }
 }

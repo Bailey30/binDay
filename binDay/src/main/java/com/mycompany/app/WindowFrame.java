@@ -40,6 +40,11 @@ public class WindowFrame {
     int maxY = size.height - this.height;
     final static String LOOKANDFEEL = "GTK";
     final static String THEME = "Ocean";
+    String greenBin;
+    JLabel green;
+    JLabel blue;
+    JLabel brown;
+    JLabel black;
 
     public WindowFrame() {
 
@@ -59,15 +64,16 @@ public class WindowFrame {
         // initLayout(dates);
     }
 
-    public void Update(HashMap<String, String> dates, String soonestBinPath) {
+    public void Init(HashMap<String, String> dates, String soonestBinPath) {
 
         this.frame.setIconImage(createImageIcon(soonestBinPath, "the bin that is collected next").getImage());
 
         this.frame.setLayout(new GridBagLayout());
         this.frame.getContentPane().setBackground(Color.WHITE);
         GridBagConstraints c = new GridBagConstraints();
-        String greenBin = (String) dates.get("GreenBin");
-        JLabel green = new JLabel(greenBin,
+
+        greenBin = (String) dates.get("GreenBin");
+        green = new JLabel(greenBin,
                 createImageIcon("/images/greenbinicon.jpg", "green bin image"),
                 JLabel.LEFT);
 
@@ -79,7 +85,7 @@ public class WindowFrame {
         this.frame.add(green, c);
 
         String blueBin = (String) dates.get("LargeBlueContainer");
-        JLabel blue = new JLabel(blueBin,
+        blue = new JLabel(blueBin,
                 createImageIcon("/images/bluebinicon.jpg", "blue bin image"),
                 JLabel.LEFT);
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -90,7 +96,7 @@ public class WindowFrame {
         this.frame.add(blue, c);
 
         String brownBin = (String) dates.get("LargeBrownContainer");
-        JLabel brown = new JLabel(brownBin,
+        brown = new JLabel(brownBin,
                 createImageIcon("/images/brownbinicon.jpg", "brown bin image"),
                 JLabel.LEFT);
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -101,7 +107,7 @@ public class WindowFrame {
         this.frame.add(brown, c);
 
         String blackBin = (String) dates.get("LargeDomesticWasteContainer");
-        JLabel black = new JLabel(blackBin,
+        black = new JLabel(blackBin,
                 createImageIcon("/images/greybinicon.jpg", "black bin image"),
                 JLabel.LEFT);
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -136,12 +142,21 @@ public class WindowFrame {
 
     public void setVisible(boolean b) {
         this.frame.setVisible(true);
-        System.out.println(this.frame.isVisible());
     }
 
     public boolean isVisible() {
 
         return this.frame.isVisible();
+    }
+
+    public void Update(HashMap<String, String> dates, String soonestBinPath) {
+        green.setText(dates.get("GreenBin"));
+        blue.setText(dates.get("LargeBlueContainer"));
+        brown.setText(dates.get("LargeBrownContainer"));
+        black.setText(dates.get("LargeDomesticWasteContainer"));
+
+        this.frame.setIconImage(createImageIcon(soonestBinPath, "the bin that is collected next").getImage());
+
     }
 
 }

@@ -29,7 +29,7 @@ public class TrayIconSetup {
     WindowFrame frame;
     TrayIcon trayIcon;
 
-    public TrayIconSetup(WindowFrame frame2, String SoonestBinPath) {
+    public TrayIconSetup(WindowFrame frame2, SoonestBin soonestBin, Updater updater) {
 
         this.frame = frame2;
 
@@ -37,18 +37,16 @@ public class TrayIconSetup {
             System.out.println("SystemTray is not supported");
             return;
         }
-        // System.out.println(today);
-        // String soonestBin = selectImage(this.today, dates);
+
         tray = SystemTray.getSystemTray();
         Image img = Toolkit.getDefaultToolkit()
-                .getImage(getClass().getResource(SoonestBinPath));
-        trayPopup = new PopupMenu("bin day");
+                .getImage(getClass().getResource(soonestBin.getSoonestBin()));
         trayIcon = new TrayIcon(img, "bin day", trayPopup);
 
         MouseAdapter mouseAdapter = new MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent e) {
-                System.out.println("Tray Icon - Mouse clicked!");
                 frame.setVisible(true);
+                getNewData(frame2, soonestBin, updater);
             }
         };
 
@@ -59,7 +57,6 @@ public class TrayIconSetup {
                 System.exit(0);
             }
         });
-        trayPopup.add(close);
 
         trayIcon.setImageAutoSize(true);
         trayIcon.addMouseListener(mouseAdapter);
@@ -72,15 +69,19 @@ public class TrayIconSetup {
         }
     }
 
-    public void getNewData() {
-        // data = dataservice.getdata();
-        // dates = htmlparser.parse(data);
-        // soonestbinpath = soonestbin.selectimage(dates);
+    public void getNewData(WindowFrame frame, SoonestBin soonestBin, Updater updater) {
 
-        // Image img = Toolkit.getDefaultToolkit()
-        // .getImage(getClass().getResource(SoonestBinPath));
+        updater.Update();
+        String soonestBinPath = soonestBin.getSoonestBin();
 
-        // this.trayIcon.setImage(img);
+        System.out.println("after set soonest bin");
+
+        Image img = Toolkit.getDefaultToolkit()
+                .getImage(getClass().getResource(soonestBinPath));
+
+        trayIcon = new TrayIcon(img, "bin day");
+
+        this.trayIcon.setImage(img);
 
     }
 

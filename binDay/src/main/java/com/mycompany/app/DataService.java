@@ -27,7 +27,6 @@ public class DataService {
         formData.put("mcc_bin_dates_submit", "Go");
 
         String formDataString = buildFormDataString(formData);
-        // System.out.println(formDataString);
 
         HttpClient httpClient = HttpClient.newHttpClient();
 
@@ -51,7 +50,6 @@ public class DataService {
 
     private static String buildFormDataString(Map<String, String> formData) {
         StringBuilder formDataString2 = new StringBuilder();
-        System.out.println(formDataString2);
         for (Map.Entry<String, String> entry : formData.entrySet()) {
             // does this first on each step, so wont add any unnecessary
             // says append, but its still adding to the front of the string
