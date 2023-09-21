@@ -1,13 +1,8 @@
 package com.mycompany.app;
 
 import java.util.HashMap;
-import java.util.HashMap;
-
-import javax.swing.event.DocumentEvent;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 public class HTMLParser {
