@@ -33,7 +33,7 @@ public class App {
         String soonestBinPath = updater.soonestBin.selectImage(dates);
         frame.Init(dates, soonestBinPath);
 
-        new TrayIconSetup(frame, soonestBin, updater);
+        new SystemTrayIcon(frame, soonestBin, updater);
 
     }
 

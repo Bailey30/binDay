@@ -23,13 +23,14 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class TrayIconSetup {
+public class SystemTrayIcon {
+
     SystemTray tray;
     PopupMenu trayPopup;
     WindowFrame frame;
     TrayIcon trayIcon;
 
-    public TrayIconSetup(WindowFrame frame2, SoonestBin soonestBin, Updater updater) {
+    public SystemTrayIcon(WindowFrame frame2, SoonestBin soonestBin, Updater updater) {
 
         this.frame = frame2;
 
