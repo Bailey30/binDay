@@ -34,8 +34,8 @@ public class DataService {
         } catch (Exception e) {
             System.out.println("error getting data" + " " + e);
         }
-        // this.response = response;
-        return response;
+
+        return this.response;
 
     }
 

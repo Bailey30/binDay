@@ -17,10 +17,16 @@ public class Updater {
 
     public void Update() {
         {
-            String data = dataService.GetData();
-            HashMap<String, String> dates = htmlParser.Parse(data);
-            String soonestBinPath = soonestBin.selectImage(dates);
-            frame.Update(dates, soonestBinPath);
+            System.out.println("start of update");
+
+            this.frame.addLoader();
+
+            String data = this.dataService.GetData();
+            HashMap<String, String> dates = this.htmlParser.Parse(data);
+            String soonestBinPath = this.soonestBin.selectImage(dates);
+            this.frame.Update(dates, soonestBinPath);
+
+            this.frame.removeLoader();
 
             System.out.println("end of update");
         }

@@ -1,6 +1,9 @@
 package com.mycompany.app;
 
 import java.awt.Color;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GraphicsEnvironment;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -12,9 +15,12 @@ import java.util.HashMap;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.border.Border;;
 
 public class WindowFrame {
@@ -31,6 +37,8 @@ public class WindowFrame {
     JLabel blue;
     JLabel brown;
     JLabel black;
+    JPanel contentPanel;
+    JPanel loadingPanel;
 
     public WindowFrame() {
 
@@ -42,9 +50,10 @@ public class WindowFrame {
         this.frame.setLocation(this.maxX, this.maxY);
         this.frame.setResizable(false);
 
-        JPanel contentPanel = new JPanel();
+        contentPanel = new JPanel();
         Border padding = BorderFactory.createEmptyBorder(5, 10, 5, 5);
         contentPanel.setBorder(padding);
+
         this.frame.setContentPane(contentPanel);
 
         // initLayout(dates);
@@ -52,10 +61,13 @@ public class WindowFrame {
 
     public void Init(HashMap<String, String> dates, String soonestBinPath) {
 
+        System.out.println(dates);
+
         this.frame.setIconImage(createImageIcon(soonestBinPath, "the bin that is collected next").getImage());
 
         this.frame.setLayout(new GridBagLayout());
         this.frame.getContentPane().setBackground(Color.WHITE);
+
         GridBagConstraints c = new GridBagConstraints();
 
         greenBin = (String) dates.get("GreenBin");
@@ -102,6 +114,44 @@ public class WindowFrame {
         c.gridx = 1;
         c.gridy = 1;
         this.frame.add(black, c);
+
+        // create loading icon
+
+        this.loadingPanel = new JPanel();
+        this.loadingPanel.setBounds(this.width / 2 - 50, 0, 100, 20); // set position
+        this.loadingPanel.setBackground(Color.WHITE);
+        this.loadingPanel.setLayout(null);
+
+        JLabel loadingLabel = new JLabel("Loading...");
+        loadingLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        loadingLabel.setBounds(0, 0, 100, 20); // set label bounds
+        this.loadingPanel.add(loadingLabel);
+
+        frame.getLayeredPane().add(this.loadingPanel, JLayeredPane.POPUP_LAYER);
+
+        // hide loading icon on init
+
+        this.loadingPanel.setVisible(false);
+
+        System.out.println("end of init");
+    }
+
+    public void initLoader() {
+        this.loadingPanel = new JPanel();
+        this.loadingPanel.setBounds(0, 0, this.width, 20); // Set the position and size of the panel
+        this.loadingPanel.setOpaque(true); // Make sure it's opaque
+        this.loadingPanel.setBackground(Color.WHITE);
+        this.loadingPanel.setLayout(null);
+
+        JLabel loaderLabel = new JLabel("updating...");
+        loaderLabel.setBounds(0, 0, this.width, 20);
+        loaderLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        loaderLabel.setVerticalAlignment(SwingConstants.TOP);
+        this.loadingPanel.add(loaderLabel);
+
+        Container contentPane = frame.getContentPane();
+        contentPane.setLayout(null); // Use null layout for absolute positioning
+        contentPane.add(this.loadingPanel);
     }
 
     protected ImageIcon createImageIcon(String path,
@@ -136,6 +186,7 @@ public class WindowFrame {
     }
 
     public void Update(HashMap<String, String> dates, String soonestBinPath) {
+
         green.setText(dates.get("GreenBin"));
         blue.setText(dates.get("LargeBlueContainer"));
         brown.setText(dates.get("LargeBrownContainer"));
@@ -143,6 +194,17 @@ public class WindowFrame {
 
         this.frame.setIconImage(createImageIcon(soonestBinPath, "the bin that is collected next").getImage());
 
+    }
+
+    public void addLoader() {
+        System.out.println("adding loader");
+        this.loadingPanel.setVisible(true);
+
+    }
+
+    public void removeLoader() {
+        System.out.println("removing loader");
+        this.loadingPanel.setVisible(false);
     }
 
 }

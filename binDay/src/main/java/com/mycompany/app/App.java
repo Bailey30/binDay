@@ -28,7 +28,7 @@ public class App {
         Updater updater = new Updater(dataService, htmlParser, soonestBin, frame);
 
         String data = updater.dataService.GetData();
-        HashMap<String, String> dates = htmlParser.Parse(data);
+        HashMap<String, String> dates = updater.htmlParser.Parse(data);
         String soonestBinPath = updater.soonestBin.selectImage(dates);
         frame.Init(dates, soonestBinPath);
 

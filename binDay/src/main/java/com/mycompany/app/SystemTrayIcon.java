@@ -10,6 +10,8 @@ import java.awt.TrayIcon;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
 
 public class SystemTrayIcon {
 
@@ -35,7 +37,9 @@ public class SystemTrayIcon {
         MouseAdapter mouseAdapter = new MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent e) {
                 frame.setVisible(true);
-                getNewData(frame2, soonestBin, updater);
+                CompletableFuture.delayedExecutor(5, TimeUnit.MILLISECONDS).execute(() -> {
+                    getNewData(frame2, soonestBin, updater);
+                });
             }
         };
 

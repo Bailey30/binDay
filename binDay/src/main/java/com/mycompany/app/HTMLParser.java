@@ -6,17 +6,17 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 public class HTMLParser {
+    HashMap<String, String> dates = new HashMap<>();
+
     public HashMap<String, String> Parse(String html) {
-        HashMap<String, String> dates = new HashMap<>();
-
         try {
-
             Document parsedHtml = Jsoup.parse(html);
             Elements parsedBins = parsedHtml.select("h3");
             Elements parsedDates = parsedHtml.select("h3 + p");
 
             for (int i = 1; i < parsedBins.size() - 1; i++) {
-                dates.put(parsedBins.get(i).text().replaceAll("\\s", ""),
+                System.out.println(parsedBins.get(i).text());
+                dates.put(parsedBins.get(i).text().replace("DUE TODAY", "").replaceAll("\\s", ""),
                         parsedDates.get(i - 1).text().replace("Next collection ", ""));
             }
 
@@ -24,7 +24,7 @@ public class HTMLParser {
             System.out.println("exception: " + e);
         }
 
-        return dates;
+        return this.dates;
 
     }
 }
