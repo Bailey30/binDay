@@ -40,6 +40,7 @@ public class SystemTrayIcon {
                 CompletableFuture.delayedExecutor(5, TimeUnit.MILLISECONDS).execute(() -> {
                     getNewData(frame2, soonestBin, updater);
                 });
+
             }
         };
 

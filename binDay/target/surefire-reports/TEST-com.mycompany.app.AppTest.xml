@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="GB"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-20\bin"/>
-    <property name="sun.java.command" value="C:\Users\Baile\AppData\Local\Temp\surefire13041301468333782576\surefirebooter1063543643117902582.jar C:\Users\Baile\AppData\Local\Temp\surefire13041301468333782576 2023-09-21T18-12-58_622-jvmRun1 surefire653936774745991506tmp surefire_07171958659367609781tmp"/>
+    <property name="sun.java.command" value="C:\Users\Baile\AppData\Local\Temp\surefire7732601408624549608\surefirebooter10354373377222680339.jar C:\Users\Baile\AppData\Local\Temp\surefire7732601408624549608 2023-09-22T19-34-11_901-jvmRun1 surefire7364973454719236223tmp surefire_0435221476818611457tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\Baile\Documents\Coding\BinDayMaven\binDay\target\test-classes;C:\Users\Baile\Documents\Coding\BinDayMaven\binDay\target\classes;C:\Users\Baile\.m2\repository\junit\junit\4.11\junit-4.11.jar;C:\Users\Baile\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\Baile\.m2\repository\org\jsoup\jsoup\1.16.1\jsoup-1.16.1.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -30,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\Baile\AppData\Local\Temp\surefire13041301468333782576\surefirebooter1063543643117902582.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\Baile\AppData\Local\Temp\surefire7732601408624549608\surefirebooter10354373377222680339.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="20.0.2+9-78"/>

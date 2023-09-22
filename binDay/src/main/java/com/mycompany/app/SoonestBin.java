@@ -15,10 +15,10 @@ public class SoonestBin {
     LocalDate today = LocalDate.now();
 
     public SoonestBin() {
-        imagePaths.put("GreenBin", "/images/greenbinicon.jpg");
-        imagePaths.put("LargeBlueContainer", "/images/bluebinicon.jpg");
-        imagePaths.put("LargeBrownContainer", "/images/brownbinicon.jpg");
-        imagePaths.put("LargeDomesticWasteContainer", "/images/greybinicon.jpg");
+        imagePaths.put("GreenBin", "/images/greenbinicon-modified.png");
+        imagePaths.put("LargeBlueContainer", "/images/bluebinicon-modified.png");
+        imagePaths.put("LargeBrownContainer", "/images/brownbinicon-modified.png");
+        imagePaths.put("LargeDomesticWasteContainer", "/images/greybinicon-modified.png");
     }
 
     public String selectImage(HashMap<String, String> dates) {
