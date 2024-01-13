@@ -91,8 +91,6 @@ public class WindowFrame {
 
         System.out.println(dates);
 
-        // make frame undecorated
-
         // does nothing as frame is undecorated
         this.frame.setIconImage(createImageIcon(soonestBinPath, "the bin that is collected next").getImage());
 
@@ -264,25 +262,20 @@ public class WindowFrame {
     }
 
     public boolean isVisible() {
-
         return this.frame.isVisible();
     }
 
     public void Update(HashMap<String, String> dates, String soonestBinPath) {
-
         green.setText(dates.get("GreenBin"));
         blue.setText(dates.get("LargeBlueContainer"));
         brown.setText(dates.get("LargeBrownContainer"));
         black.setText(dates.get("LargeDomesticWasteContainer"));
-
         this.frame.setIconImage(createImageIcon(soonestBinPath, "the bin that is collected next").getImage());
-
     }
 
     public void addLoader() {
         System.out.println("adding loader");
         this.loadingPanel.setVisible(true);
-
     }
 
     public void removeLoader() {

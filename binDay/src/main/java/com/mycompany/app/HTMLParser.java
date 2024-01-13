@@ -13,9 +13,10 @@ public class HTMLParser {
             Document parsedHtml = Jsoup.parse(html);
             Elements parsedBins = parsedHtml.select("h3");
             Elements parsedDates = parsedHtml.select("h3 + p");
+            System.out.println(parsedBins);
 
-            for (int i = 1; i < parsedBins.size() - 1; i++) {
-                System.out.println(parsedBins.get(i).text());
+            for (int i = 1; i < parsedBins.size(); i++) {
+                System.out.println("parsed bin: " + i + " " + parsedBins.get(i).text());
                 dates.put(parsedBins.get(i).text().replace("DUE TODAY", "").replaceAll("\\s", ""),
                         parsedDates.get(i - 1).text().replace("Next collection ", ""));
             }

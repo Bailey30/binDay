@@ -2,6 +2,7 @@ package com.mycompany.app;
 
 import java.awt.AWTException;
 import java.awt.Image;
+import java.awt.Menu;
 import java.awt.MenuItem;
 import java.awt.PopupMenu;
 import java.awt.SystemTray;
@@ -29,21 +30,7 @@ public class SystemTrayIcon {
             return;
         }
 
-        tray = SystemTray.getSystemTray();
-        Image img = Toolkit.getDefaultToolkit()
-                .getImage(getClass().getResource(soonestBin.getSoonestBin()));
-        trayIcon = new TrayIcon(img, "bin day", trayPopup);
-
-        MouseAdapter mouseAdapter = new MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent e) {
-                frame.setVisible(true);
-                CompletableFuture.delayedExecutor(5, TimeUnit.MILLISECONDS).execute(() -> {
-                    getNewData(frame2, soonestBin, updater);
-                });
-
-            }
-        };
-
+        trayPopup = new PopupMenu();
         MenuItem close = new MenuItem("close");
         close.addActionListener(new ActionListener() {
             @Override
@@ -51,6 +38,29 @@ public class SystemTrayIcon {
                 System.exit(0);
             }
         });
+        trayPopup.add(close);
+
+        tray = SystemTray.getSystemTray();
+        Image img = Toolkit.getDefaultToolkit()
+                .getImage(getClass().getResource(soonestBin.getSoonestBin()));
+        trayIcon = new TrayIcon(img, "bin day", trayPopup);
+
+        MouseAdapter mouseAdapter = new MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent e) {
+                // only set visible on left mouse click
+                if (e.getButton() == 1) {
+                    frame.setVisible(true);
+                    CompletableFuture.delayedExecutor(5, TimeUnit.MILLISECONDS).execute(() -> {
+                        try {
+                            getNewData(frame2, soonestBin, updater);
+                        } catch (AWTException e1) {
+                            e1.printStackTrace();
+                        }
+                    });
+                }
+
+            }
+        };
 
         trayIcon.setImageAutoSize(true);
         trayIcon.addMouseListener(mouseAdapter);
@@ -63,7 +73,7 @@ public class SystemTrayIcon {
         }
     }
 
-    public void getNewData(WindowFrame frame, SoonestBin soonestBin, Updater updater) {
+    public void getNewData(WindowFrame frame, SoonestBin soonestBin, Updater updater) throws AWTException {
 
         updater.Update();
         String soonestBinPath = soonestBin.getSoonestBin();
@@ -73,9 +83,11 @@ public class SystemTrayIcon {
         Image img = Toolkit.getDefaultToolkit()
                 .getImage(getClass().getResource(soonestBinPath));
 
-        trayIcon = new TrayIcon(img, "bin day");
-
-        this.trayIcon.setImage(img);
+        try {
+            this.trayIcon.setImage(img);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
 
     }
 
